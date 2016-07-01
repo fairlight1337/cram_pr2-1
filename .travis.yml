@@ -15,9 +15,9 @@ before_install:
  - sudo rosdep init
  - rosdep update
  - source /opt/ros/indigo/setup.bash
- - sudo apt-get install -y python-rosinstall
+ - sudo apt-get install -y python-rosinstall python-wstool python-pip
  - sudo apt-get install -y ros-indigo-roslisp-repl
- - sudo apt-get install -y python-rosinstall python-wstool
+ - pip install catkin_pkg
  - mkdir -p ~/workspace/ros_kb/src
  - cd ~/workspace/ros_kb
  - catkin_make
