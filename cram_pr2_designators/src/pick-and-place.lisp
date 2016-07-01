@@ -173,7 +173,7 @@
           (t (cl-transforms:translation lift-transform)))))
 
 (defun object-type->tool-length (object-type)
-  (let ((bounding-box (btr:item-dimensions object-type)))
+  (let ((bounding-box (item-dimensions object-type)))
     (cram-robot-interfaces:calculate-bounding-box-tool-length
      bounding-box)))
 
