@@ -1,0 +1,46 @@
+language: cpp
+
+script:
+ - ./scripts/load.sh
+
+before_install:
+ - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+ - sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
+ - sudo apt-get update -qq
+ - sudo apt-get install -y ros-indigo-desktop
+ - sudo rosdep init
+ - rosdep update
+ - source /opt/ros/indigo/setup.bash
+ - sudo apt-get install -y python-rosinstall
+ - sudo apt-get install -y ros-indigo-roslisp-repl
+ - sudo apt-get install -y python-rosinstall python-wstool
+ - mkdir -p ~/workspace/ros_kb/src
+ - cd ~/workspace/ros_kb
+ - catkin_make
+ - source devel/setup.bash
+ - mkdir -p ~/workspace/ros_lisp/src
+ - cd ~/workspace/ros_lisp
+ - catkin_make
+ - source devel/setup.bash
+ - mkdir -p ~/workspace/ros_top/src
+ - cd ~/workspace/ros_top
+ - catkin_make
+ - source devel/setup.bash
+ - echo "source $HOME/workspace/ros_top/devel/setup.bash" >> ~/.bashrc
+ - sudo apt-get -y install ros-indigo-rosjava
+ - rosdep update
+ - cd ~/workspace/ros_kb/src
+ - wstool init
+ - wstool merge https://raw.github.com/knowrob/knowrob/master/rosinstall/knowrob-base.rosinstall
+ - wstool update
+ - rosdep install --ignore-src --from-paths stacks/
+ - cd ~/workspace/ros_kb
+ - catkin_make
+ - cd ~/workspace/ros_lisp/src
+ - wstool init
+ - wstool merge https://raw.githubusercontent.com/cram2/cram_projection_demos/master/cram-with-projection.rosinstall
+ - wstool update
+ - cd ~/workspace/ros_lisp
+ - rosdep update
+ - rosdep install --ignore-src --from-paths src/
+ - catkin_make
