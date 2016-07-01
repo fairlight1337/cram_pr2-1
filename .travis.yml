@@ -1,5 +1,6 @@
 language: cpp
 
+
 script:
  - ./scripts/load.sh
 
