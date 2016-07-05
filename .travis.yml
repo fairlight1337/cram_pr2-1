@@ -16,7 +16,7 @@ before_install:
  - rosdep update
  - source /opt/ros/indigo/setup.bash
  - sudo apt-get install -y python-rosinstall python-wstool python-pip
- - sudo apt-get install -y ros-indigo-roslisp-repl libjson-glib-1.0-0
+ - sudo apt-get install -y ros-indigo-roslisp-repl libjson-glib-1.0-0 libjson-glib-dev libjson-c-dev libjson-c2
  - sudo pip install --upgrade pip
  - sudo pip install catkin_pkg
  - mkdir -p ~/workspace/ros_kb/src
